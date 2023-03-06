@@ -1,20 +1,17 @@
--- create a type_enum
--- CREATE TYPE type_enum AS ENUM ('int', 'string');
-
 CREATE TABLE IF NOT EXISTS answers (
     id SERIAL PRIMARY KEY,
-    a_type VARCHAR(10) NOT NULL,
+    question_id SERIAL NOT NULL,
     answer VARCHAR NOT NULL
 );
 
 ALTER TABLE answers REPLICA IDENTITY FULL;
 
 INSERT INTO answers VALUES
-  (1, 'int', ''),
-  (2, 'string', ''),
-  (3, 'int', ''),
-  (4, 'int', ''),
-  (5, 'int', '') ON CONFLICT DO NOTHING
+  (1, 'answer 1'),
+  (2, 'answer 2'),
+  (3, 'answer 3'),
+  (4, 'answer 4'),
+  (5, 'answer 5') ON CONFLICT DO NOTHING
   ;
 
 -- update the sequence to the max id
