@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS answers (
     id SERIAL PRIMARY KEY,
-    question_id SERIAL NOT NULL,
     answer VARCHAR NOT NULL
 );
 
