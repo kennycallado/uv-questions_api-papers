@@ -27,8 +27,4 @@ diesel::table! {
 diesel::joinable!(paper_answers -> answers (answer_id));
 diesel::joinable!(paper_answers -> papers (paper_id));
 
-diesel::allow_tables_to_appear_in_same_query!(
-    answers,
-    paper_answers,
-    papers,
-);
+diesel::allow_tables_to_appear_in_same_query!(answers, paper_answers, papers,);
