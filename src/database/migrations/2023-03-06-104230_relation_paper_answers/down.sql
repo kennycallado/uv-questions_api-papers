@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS paper_answers CASCADE;
+DROP PUBLICATION IF EXISTS paper_answers_pub;
