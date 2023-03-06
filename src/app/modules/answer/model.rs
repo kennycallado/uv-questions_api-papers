@@ -6,6 +6,7 @@ use crate::database::schema::answers;
 #[serde(crate = "rocket::serde")]
 pub struct Answer {
     pub id: i32,
+    pub question_id: i32,
     pub answer: String,
 }
 
@@ -13,12 +14,14 @@ pub struct Answer {
 #[serde(crate = "rocket::serde")]
 #[table_name = "answers"]
 pub struct NewAnswer {
+    pub question_id: i32,
     pub answer: String,
 }
 
 impl From<Answer> for NewAnswer {
     fn from(answer: Answer) -> Self {
         NewAnswer {
+            question_id: answer.question_id,
             answer: answer.answer,
         }
     }
