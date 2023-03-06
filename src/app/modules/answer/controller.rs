@@ -12,7 +12,7 @@ pub fn routes() -> Vec<rocket::Route> {
 }
 
 #[get("/", rank = 1)]
-pub async fn get_index_admin(db: Db, _claims: AdminClaims) -> Result<Json<Vec<Answer>>, Status> {
+pub async fn get_index_admin(db: Db, _admin: AdminClaims) -> Result<Json<Vec<Answer>>, Status> {
     let answers = answer_repository::get_all(&db).await;
 
     match answers {
@@ -32,7 +32,7 @@ pub async fn get_index_none() -> Status {
 }
 
 #[get("/<id>", rank = 1)]
-pub async fn get_show_admin(id: i32, db: Db) -> Result<Json<Answer>, Status> {
+pub async fn get_show_admin(db: Db, _admin: AdminClaims, id: i32) -> Result<Json<Answer>, Status> {
     let answer = answer_repository::get_by_id(&db, id).await;
 
     match answer {
