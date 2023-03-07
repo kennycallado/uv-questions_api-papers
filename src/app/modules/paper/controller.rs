@@ -5,15 +5,15 @@ use rocket::Route;
 use crate::app::providers::guards::admin::AdminClaims;
 use crate::config::database::Db;
 
-use crate::app::modules::paper::model::{NewPaper, Paper, PaperWithAnswers};
+use crate::app::modules::paper::model::{NewPaper, Paper, PaperWithAnswers, PaperWithNewAnswers};
 
 use crate::app::modules::paper::services::repository as paper_repository;
 use crate::app::modules::paper_answers::services::repository as paper_answers_repository;
 
-use super::model::PaperWithNewAnswers;
-
 pub fn routes() -> Vec<Route> {
     routes![
+        options_create_admin,
+        options_update_admin,
         get_index_admin,
         get_index_none,
         get_show_admin,
@@ -23,6 +23,18 @@ pub fn routes() -> Vec<Route> {
         update_paper_admin,
         update_paper_none,
     ]
+}
+
+#[options("/")]
+pub async fn options_create_admin(_admin: AdminClaims) -> Status {
+    println!("AUTH: options_create_admin");
+    Status::Ok
+}
+
+#[options("/<id>")]
+pub async fn options_update_admin(id: i32) -> Status {
+    println!("AUTH: options_update_admin: id = {}", id);
+    Status::Ok
 }
 
 #[get("/", rank = 1)]
