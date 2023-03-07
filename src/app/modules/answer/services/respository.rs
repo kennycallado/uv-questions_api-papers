@@ -7,7 +7,7 @@ use crate::app::modules::answer::model::{Answer, NewAnswer};
 
 pub async fn get_all(db: &Db) -> Result<Vec<Answer>, diesel::result::Error> {
     let result = db
-        .run(move |conn| { answers::table.load::<Answer>(conn) })
+        .run(move |conn| answers::table.load::<Answer>(conn))
         .await?;
 
     Ok(result.into_iter().map(|answer| answer.into()).collect())

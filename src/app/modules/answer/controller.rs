@@ -8,7 +8,12 @@ use crate::app::modules::answer::model::Answer;
 use crate::app::modules::answer::services::respository as answer_repository;
 
 pub fn routes() -> Vec<rocket::Route> {
-    routes![get_index_admin, get_index_none, get_show_admin, get_show_none]
+    routes![
+        get_index_admin,
+        get_index_none,
+        get_show_admin,
+        get_show_none
+    ]
 }
 
 #[get("/", rank = 1)]
