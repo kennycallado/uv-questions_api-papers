@@ -1,9 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::app::modules::answer::model::Answer;
-
-use crate::app::providers::interfaces::form::Form;
-use crate::app::providers::interfaces::user::User;
+use crate::app::modules::answer::model::{Answer, NewAnswer};
 
 use crate::database::schema::papers;
 
@@ -32,14 +29,14 @@ impl From<Paper> for NewPaper {
     }
 }
 
-impl From<PaperComplete> for NewPaper {
-    fn from(paper: PaperComplete) -> Self {
-        NewPaper {
-            user_id: paper.user.id,
-            form_id: paper.form.id,
-        }
-    }
-}
+// impl From<PaperComplete> for NewPaper {
+//     fn from(paper: PaperComplete) -> Self {
+//         NewPaper {
+//             user_id: paper.user.id,
+//             form_id: paper.form.id,
+//         }
+//     }
+// }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(crate = "rocket::serde")]
@@ -50,6 +47,15 @@ pub struct PaperWithAnswers {
     pub answers: Vec<Answer>,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(crate = "rocket::serde")]
+pub struct PaperWithNewAnswers {
+    pub id: i32,
+    pub user_id: i32,
+    pub form_id: i32,
+    pub answers: Vec<NewAnswer>,
+}
+
 // #[derive(Debug, Serialize, Deserialize)]
 // #[serde(crate = "rocket::serde")]
 // pub struct NewPaperWithAnswers {
@@ -58,11 +64,11 @@ pub struct PaperWithAnswers {
 //     pub answers: Vec<Answer>,
 // }
 
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(crate = "rocket::serde")]
-pub struct PaperComplete {
-    pub id: i32,
-    pub user: User,
-    pub form: Form,
-    pub answers: Vec<Answer>,
-}
+// #[derive(Debug, Serialize, Deserialize)]
+// #[serde(crate = "rocket::serde")]
+// pub struct PaperComplete {
+//     pub id: i32,
+//     pub user: User,
+//     pub form: Form,
+//     pub answers: Vec<Answer>,
+// }

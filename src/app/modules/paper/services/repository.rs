@@ -3,8 +3,7 @@ use diesel::prelude::*;
 use crate::config::database::Db;
 use crate::database::schema::papers;
 
-use crate::app::modules::paper::model::{Paper, NewPaper};
-
+use crate::app::modules::paper::model::{NewPaper, Paper};
 
 pub async fn get_all(db: &Db) -> Result<Vec<Paper>, diesel::result::Error> {
     let papers = db.run(move |c| papers::table.load::<Paper>(c)).await?;
