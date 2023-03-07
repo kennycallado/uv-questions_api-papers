@@ -79,7 +79,11 @@ pub async fn get_show_none(_id: i32) -> Status {
 }
 
 #[post("/", data = "<new_paper>", rank = 1)]
-pub async fn create_paper_admin(db: Db, _admin: AdminClaims, new_paper: Json<NewPaper>) -> Result<Json<Paper>, Status> {
+pub async fn create_paper_admin(
+    db: Db,
+    _admin: AdminClaims,
+    new_paper: Json<NewPaper>,
+) -> Result<Json<Paper>, Status> {
     let new_paper = new_paper.into_inner();
 
     let paper = paper_repository::create(&db, new_paper).await;
@@ -100,7 +104,12 @@ pub async fn create_paper_none(_new_paper: Json<NewPaper>) -> Status {
 }
 
 #[put("/<id>", data = "<paper>", rank = 1)]
-pub async fn update_paper_admin(db: Db, _admin: AdminClaims, id: i32, paper: Json<PaperWithNewAnswers>) -> Result<Json<PaperWithAnswers>, Status> {
+pub async fn update_paper_admin(
+    db: Db,
+    _admin: AdminClaims,
+    id: i32,
+    paper: Json<PaperWithNewAnswers>,
+) -> Result<Json<PaperWithAnswers>, Status> {
     let paper = paper.into_inner();
 
     let new_answers = paper.answers;
@@ -137,7 +146,6 @@ pub async fn update_paper_admin(db: Db, _admin: AdminClaims, id: i32, paper: Jso
 
     Ok(Json(response))
 }
-
 
 #[put("/<_id>", data = "<_paper>", rank = 5)]
 pub async fn update_paper_none(_id: i32, _paper: Json<PaperWithNewAnswers>) -> Status {
